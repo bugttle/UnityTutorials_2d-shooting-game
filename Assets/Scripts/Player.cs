@@ -6,10 +6,16 @@ public class Player : MonoBehaviour
 		// Spaceshipコンポーネント
 		Spaceship spaceship;
 
+		// Backgroundコンポーネント
+		Background background;
+
 		IEnumerator Start ()
 		{
 				//  Spaceshipコンポーネントを取得
 				spaceship = GetComponent<Spaceship> ();
+
+				// Backgroundコンポーネントを取得。3つのうちどれか1つを取得する
+				background = FindObjectOfType<Background> ();
 
 				while (true) {
 						// 弾をプレイヤーと同じ位置/角度で作成
@@ -38,13 +44,17 @@ public class Player : MonoBehaviour
 				Move (direction);
 		}
 
+		// 機体の移動
 		void Move (Vector2 direction)
 		{
-				// 画面左下のワールド座標をビューポートから取得
-				Vector2 min = Camera.main.ViewportToWorldPoint (new Vector2 (0, 0));
+				// 背景のスケール
+				Vector2 scale = background.transform.localScale;
 
-				// 画面右上のワールド座標をビューポートから取得
-				Vector2 max = Camera.main.ViewportToWorldPoint (new Vector2 (1, 1));
+				// 背景のスケールから取得
+				Vector2 min = scale * -0.5f;
+
+				// 背景のスケールから取得
+				Vector2 max = scale * 0.5f;
 
 				// プレイヤーの座標を取得
 				Vector2 pos = transform.position;
