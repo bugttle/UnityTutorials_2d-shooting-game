@@ -16,6 +16,19 @@ public class DestroyArea : MonoBehaviour
 
 		void OnTriggerExit2D (Collider2D c)
 		{
-				Destroy (c.gameObject);
+				// レイヤー名を取得
+				string layerName = LayerMask.LayerToName (c.gameObject.layer);
+		
+				// レイヤー名がBullet (Enemy)またはBullet (Player)の時は弾を削除
+				if (layerName == "Bullet (Enemy)") {
+						// エネミー弾の非アクティブ化
+						ObjectPool.instance.ReleaseGameObject (c.gameObject);
+				} else if (layerName == "Bullet (Player)") {
+						// プレイヤーの弾の非アクティブ化
+						ObjectPool.instance.ReleaseGameObject (c.transform.parent.gameObject);
+				} else {
+						// それ以外は削除
+						Destroy (c.gameObject);
+				}
 		}
 }

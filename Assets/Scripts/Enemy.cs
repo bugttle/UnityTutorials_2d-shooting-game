@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
 				hp = hp - bullet.power;
 
 				// 弾の削除
-				Destroy (c.gameObject);
+				ObjectPool.instance.ReleaseGameObject (c.transform.parent.gameObject);
 
 				if (hp <= 0) {
 						// スコアコンポーネントを取得してポイントを追加

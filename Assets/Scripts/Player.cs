@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
 				// レイヤー名がBullet (Enemy)の時は弾を削除
 				if (layerName == "Bullet (Enemy)") {
 						// 弾の削除
-						Destroy (c.gameObject);
+						ObjectPool.instance.ReleaseGameObject (c.gameObject);
 				}
 
 				// レイヤー名がBullet (Enemy)またはEnemyの場合は爆発
