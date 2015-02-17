@@ -897,6 +897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 100000, guid: 32dfcb825986a4781964886d39365808, type: 2}
+  shareButtonImage: {fileID: 2800000, guid: 33a9af0ead06649538126450944ed1d4, type: 3}
 --- !u!4 &1294358686
 Transform:
   m_ObjectHideFlags: 0

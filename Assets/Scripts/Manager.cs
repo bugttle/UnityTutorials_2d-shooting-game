@@ -1,13 +1,21 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Runtime.InteropServices;
 
 public class Manager : MonoBehaviour
 {
-
 		// Playerプレハブ
 		public GameObject player;
 
 		// タイトル
 		private GameObject title;
+
+		// シェアのテクスチャ
+		public Texture2D shareButtonImage;
+
+		// iOS側のコードを呼び出すための処理
+		[DllImport("__Internal")]
+		private static extern void Shooting_Share (string text, string url, string textureUrl);
 
 		void Start ()
 		{
@@ -17,10 +25,36 @@ public class Manager : MonoBehaviour
 
 		void OnGUI ()
 		{
-				// ゲーム中ではなく、タッチまたはマウスクリック直後であればtrueを返す。
-				if (IsPlaying () == false && Event.current.type == EventType.MouseDown) {
-						GameStart ();
+				// ゲーム中でない時
+				if (IsPlaying () == false) {
+						// シェアボタンを設置
+						if (GUILayout.Button (shareButtonImage, GUIStyle.none, GUILayout.Width (128), GUILayout.Height (128))) {
+								// シェアする処理をコルーチンで実行
+								StartCoroutine (Share ());
+						}
+						// ゲーム中ではなく、タッチまたはマウスクリック直後であればtrueを返す。
+						if (IsPlaying () == false && Event.current.type == EventType.MouseDown) {
+								GameStart ();
+						}
 				}
+		}
+
+		IEnumerator Share ()
+		{
+				// 現在の画面をキャプチャして名前をscreenShotとして保存する
+				Application.CaptureScreenshot ("screenShot.png");
+
+				// キャプチャを保存する処理として1フレーム待つ
+				yield return new WaitForEndOfFrame ();
+
+				string text = "2Dシューティング チュートリアル #unity";
+				string url = "http://japan.unity3d.com/developer/document/tutorial/2d-shooting-game/ios/01.html";
+
+				// Application.CaptureScreenshotの保存先はApplication.persistentDataPath
+				string textureUrl = Application.persistentDataPath + "/screenShot.png";
+
+				// iOS側の処理を呼び出す
+				Shooting_Share (text, url, textureUrl);
 		}
 
 		void GameStart ()
