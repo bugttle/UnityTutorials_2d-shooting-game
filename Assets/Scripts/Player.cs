@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnitySampleAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour
 {
@@ -32,10 +33,10 @@ public class Player : MonoBehaviour
 		void Update ()
 		{
 				// 右・左
-				float x = Input.GetAxisRaw ("Horizontal");
+				float x = CrossPlatformInputManager.GetAxisRaw ("Horizontal");
 
 				// 上・下
-				float y = Input.GetAxisRaw ("Vertical");
+				float y = CrossPlatformInputManager.GetAxisRaw ("Vertical");
 
 				// 移動する向きを求める
 				Vector2 direction = new Vector2 (x, y).normalized;
