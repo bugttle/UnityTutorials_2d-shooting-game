@@ -344,7 +344,7 @@ GameObject:
   - 4: {fileID: 489041700}
   - 132: {fileID: 489041699}
   m_Layer: 0
-  m_Name: Press X
+  m_Name: Tap To Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -358,7 +358,7 @@ GUIText:
   m_GameObject: {fileID: 489041698}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: Press X
+  m_Text: Tap To Start
   m_Anchor: 1
   m_Alignment: 0
   m_PixelOffset: {x: 0, y: 0}
